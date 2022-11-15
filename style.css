@@ -25,13 +25,18 @@ main {
     width: 100%;
 }
 
-.user-input {
-    width: 200px;
-    height: 200px;
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
-}
-
 .note-area {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 32px;
     width: 100%;
+}
+
+.input {
+    border: none;
+}
+
+.d-none {
+    display: none;
 }

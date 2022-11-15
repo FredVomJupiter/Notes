@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body onload="render()">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="bootstrap" viewBox="0 0 118 94">
             <title>Bootstrap</title>
@@ -48,13 +48,55 @@
     </nav>
 
     <main>
+
         <div class="top-area">
-            <div class="user-input"></div>
-        </div>
-        <div class="note-area">
+            <p>
+                <button id="createNote" class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample"
+                    onclick="hideButton()">
+                    New note
+                </button>
+            </p>
+
+            <div style="min-height: 120px;">
+                <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                    <!--Bootstrap card-->
+                    <div class="card" style="width: 23rem;">
+                        <div class="card-body">
+                            <!--Bootstrap input text-->
+                            <div class="input-group">
+                                <input id="title" type="text" class="form-control" placeholder="Title">
+                            </div>
+                            <!--Bootstrap input textarea-->
+                            <div class="input-group mb-3">
+                                <textarea id="textarea" type="textarea" class="form-control"></textarea>
+                            </div>
+                            <!--Bootstrap button-->
+                            <button class="btn btn-primary" type="button" onclick="createNote()">Create note</button>
+                            <!--Bootstrap input dropdown button-->
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Options
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Background color</a></li>
+                                    <li><a class="dropdown-item" href="#">Text color</a></li>
+                                    <li><a class="dropdown-item" href="#">Create list</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
-        
+
+        <div id="noteArea" class="note-area">
+
+        </div>
+
     </main>
 
     <div class="container">
@@ -81,7 +123,8 @@
             </ul>
         </footer>
     </div>
-
+    <!-- JavaScript Bundle with Popper -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 
