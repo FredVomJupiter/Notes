@@ -39,8 +39,8 @@
     <nav class="navbar bg-light">
         <div class="container-fluid">
             <img id="noteIcon" src="img/notepad.png">
-            <a class="navbar-brand" href="index.html">Notes</a>
-            <a class="navbar-brand" href="#">Trash</a>
+            <a class="navbar-brand" href="index.html" onclick="showNotes()">Notes</a>
+            <a class="navbar-brand" href="#" onclick="showTrash()">Trash</a>
             <div class="form-outline">
                 <input type="search" id="form1" class="form-control" placeholder="Type query" aria-label="Search" />
             </div>
@@ -48,52 +48,48 @@
     </nav>
 
     <main>
+        <div class="background" id="canvas">
 
-        <div class="top-area">
-            <p>
-                <button id="createNote" class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample"
-                    onclick="hideButton()">
-                    New note
-                </button>
-            </p>
-
-            <div style="min-height: 120px;">
-                <div class="collapse collapse-horizontal" id="collapseWidthExample">
-                    <!--Bootstrap card-->
-                    <div class="card" style="width: 23rem;">
-                        <div class="card-body">
-                            <!--Bootstrap input text-->
-                            <div class="input-group">
-                                <input id="title" type="text" class="form-control" placeholder="Title">
-                            </div>
-                            <!--Bootstrap input textarea-->
-                            <div class="input-group mb-3">
-                                <textarea id="textarea" type="textarea" class="form-control"></textarea>
-                            </div>
-                            <!--Bootstrap button-->
-                            <button class="btn btn-primary" type="button" onclick="createNote()">Create note</button>
-                            <!--Bootstrap input dropdown button-->
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Options
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Background color</a></li>
-                                    <li><a class="dropdown-item" href="#">Text color</a></li>
-                                    <li><a class="dropdown-item" href="#">Create list</a></li>
-                                </ul>
+            <div class="top-area">
+                <p>
+                    <button id="createNote" class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample"
+                        onclick="hideButton()">
+                        New note
+                    </button>
+                </p>
+    
+                <div id="newNote" style="min-height: 120px;">
+                    <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                        <!--Bootstrap card-->
+                        <div class="card" style="width: 23rem; background: #ced4da;">
+                            <div class="card-body">
+                                <!--Bootstrap input text-->
+                                <div class="input-group">
+                                    <input id="title" type="text" class="form-control" placeholder="Title">
+                                </div>
+                                <!--Bootstrap input textarea-->
+                                <div class="input-group mb-3">
+                                    <textarea id="textarea" type="textarea" class="form-control"></textarea>
+                                </div>
+                                <!--Bootstrap button-->
+                                <button class="btn btn-primary" type="button" onclick="createNote()">Create note</button>
                             </div>
                         </div>
                     </div>
                 </div>
+    
+    
             </div>
-
+    
+            <div id="noteArea" class="note-area">
+    
+            </div>
 
         </div>
 
-        <div id="noteArea" class="note-area">
+        <div class="trash d-none" id="trash">
+
 
         </div>
 
@@ -111,21 +107,23 @@
             </div>
 
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-muted" href="https://www.twitter.com" target="_blank"><svg class="bi" width="24" height="24">
                             <use xlink:href="#twitter"></use>
                         </svg></a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-muted" href="https://www.instagram.com" target="_blank"><svg class="bi" width="24" height="24">
                             <use xlink:href="#instagram"></use>
                         </svg></a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-muted" href="https://www.facebook.com" target="_blank"><svg class="bi" width="24" height="24">
                             <use xlink:href="#facebook"></use>
                         </svg></a></li>
             </ul>
         </footer>
     </div>
+
     <!-- JavaScript Bundle with Popper -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/sub.js"></script>
 </body>
 
 </html>

@@ -18,6 +18,23 @@ main {
     min-height: 100vh;
 }
 
+.background {
+    min-height: inherit;
+    background: linear-gradient(rgba(226, 222, 222, 0.6), rgba(0,0,0,.6)), url('img/background.jpg');
+    background-size: cover;
+}
+
+.trash {
+    display: flex; 
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 32px;
+    gap: 8px;
+    width: 100%;
+    min-height: inherit;
+    background-image: linear-gradient(rgba(226, 222, 222, 0.6), rgba(0, 0, 0, 0.6));
+}
+
 .top-area {
     display: flex;
     justify-content: center;
@@ -25,11 +42,12 @@ main {
     width: 100%;
 }
 
-.note-area {
-    display: flex;
+.note-area {                          
+    display: flex; 
     justify-content: center;
     flex-wrap: wrap;
     padding: 32px;
+    gap: 8px;
     width: 100%;
 }
 
