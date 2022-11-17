@@ -3,8 +3,15 @@ let database = [];
 let deletedNotes = [];
 
 
+function start() {
+    checkNavbarSelection();
+    render();
+    renderTrash()
+}
+
+
 /**
- * 1. Main thread starting point
+ * A.1. Main thread starting point
  */
 function createNote() {
     if (title.value === '' && textarea.value === '') {
@@ -17,19 +24,18 @@ function createNote() {
 }
 
 /**
- * 1.1 called by createNote()
+ * A.1.1 called by createNote()
  */
 function save() {
     let newTitle = document.getElementById('title');
     let newText = document.getElementById('textarea');
     let newNote = { "title": newTitle.value, "text": newText.value };
     database.push(newNote);
-    let savedData = JSON.stringify(database);
-    localStorage.setItem('data', savedData);
+    saveJSON("database")
 }
 
 /**
- * 1.2 called by createNote()
+ * A.1.2 called by createNote()
  */
 function hideInputCard() {
     clearUserInput();
@@ -39,7 +45,7 @@ function hideInputCard() {
 }
 
 /**
- * 1.2.1 called by hideInputCard()
+ * A.1.2.1 called by hideInputCard()
  */
 function clearUserInput() {
     let title = document.getElementById('title');
@@ -49,7 +55,7 @@ function clearUserInput() {
 }
 
 /**
- * 1.2.2 called by hideInputCard()
+ * A.1.2.2 called by hideInputCard()
  */
 function showButton() {
     let createNote = document.getElementById('createNote');
@@ -57,7 +63,7 @@ function showButton() {
 }
 
 /**
- * 1.3 called by createNote()
+ * A.1.3 called by createNote()
  */
 function render() {
     load();
@@ -65,7 +71,7 @@ function render() {
 }
 
 /**
- * 1.3.1 called by render()
+ * A.1.3.1 called by render()
  */
 function load() {
     let loadedData = localStorage.getItem('data');
@@ -75,7 +81,7 @@ function load() {
 }
 
 /**
- * 1.3.2 called by render()
+ * A.1.3.2 called by render()
  */
 function createNoteTemplate() {
     let noteArea = document.getElementById('noteArea');
@@ -92,7 +98,7 @@ function createNoteTemplate() {
 }
 
 /**
- * 1.3.2.1 called by createNoteTemplate()
+ * A.1.3.2.1 called by createNoteTemplate()
  */
 function htmlTemplate(index) {
     return `
@@ -119,7 +125,7 @@ function htmlTemplate(index) {
 }
 
 /**
- * 1.3.2.2 called by createNoteTemplate()
+ * A.1.3.2.2 called by createNoteTemplate()
  * @param index of database
  */
 function writeCardInput(index) {
@@ -131,7 +137,7 @@ function writeCardInput(index) {
 
 
 /**
- * 1. Delete process starts here
+ * B.1 Delete process starts here
  * @param {*} index of database
  */
  function deleteCard(index) {
@@ -150,7 +156,9 @@ function hideButton() {
     createNote.classList.add('d-none');
 }
 
-
+/**
+ * C.1 Render Trash starts here
+ */
 function renderTrash() {
     loadTrash();
     createTrashTemplate();
@@ -208,11 +216,8 @@ function writeTrashInput(index) {
 
 function saveTrash(index) {
     let deletedNote = database[index];
-    console.log("setting deleted note: ", deletedNote);
     deletedNotes.push(deletedNote);
-    console.log("pushing deleted note: ", deletedNotes);
-    let savedData = JSON.stringify(deletedNotes);
-    localStorage.setItem('deletedData', savedData);
+    saveJSON("deletedNotes");
 }
 
 
@@ -224,11 +229,12 @@ function loadTrash() {
 }
 
 
-function showNotes() {
+function showNotes() {  
     let canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
     let canvasTrash = document.getElementById('canvasTrash');
     canvasTrash.classList.add('d-none')
+    checkNavbarSelection();
     render();
 }
 
@@ -237,7 +243,56 @@ function showTrash() {
     let canvas = document.getElementById('canvas');
     canvas.classList.add('d-none');
     let canvasTrash = document.getElementById('canvasTrash');
-    canvasTrash.classList.remove('d-none')
+    canvasTrash.classList.remove('d-none');
+    checkNavbarSelection();
     renderTrash();
 }
 
+
+function deleteRemoved(index) {
+    deletedNotes.splice(index, 1);
+    saveJSON("deletedNotes");
+    renderTrash();
+}
+
+
+function restoreRemoved(index) {
+    let restoredNote = deletedNotes[index];
+    database.push(restoredNote);
+    saveJSON("database");
+    deletedNotes.splice(index, 1);
+    saveJSON("deletedNotes");
+    renderTrash();
+}
+
+/**
+ * A.1.1.1 called by save()
+ * @param {*} option referencing the arrays defined on top "deletedNotes" or "database" 
+ */
+function saveJSON(option) {
+    if ("database") {
+        let savedData = JSON.stringify(database);
+        localStorage.setItem('data', savedData);
+    }
+    if ("deletedNotes") {
+        let savedData = JSON.stringify(deletedNotes);
+        localStorage.setItem('deletedData', savedData);
+    }
+}
+
+
+function checkNavbarSelection() {
+    console.log("checking...");
+    let canvas = document.getElementById('canvas');
+    let trashLink = document.getElementById('trashLink');
+    let noteLink = document.getElementById('notesLink');
+    if (canvas.classList.contains('d-none')) {
+        console.log("trashLink active");
+        noteLink.style.textDecoration = "none";
+        trashLink.style.textDecoration = "underline";
+    } else {
+        console.log("notesLink active");
+        trashLink.style.textDecoration = "none";
+        noteLink.style.textDecoration = "underline";
+    }
+}
