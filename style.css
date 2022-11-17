@@ -30,7 +30,7 @@ main {
 
 .background {
     min-height: inherit;
-    background: linear-gradient(rgba(226, 222, 222, 0.6), rgba(0,0,0,.6)), url('img/background.jpg');
+    background: linear-gradient(rgba(226, 222, 222, .4), rgba(0,0,0,.6)), url('img/background.jpg');
     background-size: cover;
 }
 

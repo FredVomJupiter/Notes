@@ -9,7 +9,6 @@ function start() {
     renderTrash()
 }
 
-
 /**
  * A.1. Main thread starting point
  */
@@ -135,7 +134,6 @@ function writeCardInput(index) {
     text.value += database[index].text;
 }
 
-
 /**
  * B.1 Delete process starts here
  * @param {*} index of database
@@ -197,7 +195,7 @@ function htmlTemplateDeleted(index) {
                     <!--Bootstrap input dropdown button-->
                     <div class="btn-group">
                         <button id="deleteRemoved${index}" type="button" class="btn btn-danger" onclick="deleteRemoved(${index})">Delete</button>
-                        <button id="restoreRemoved${index}" type="button" class="btn btn-primary" onclick="restoreRemoved(${index})">Restore</button>
+                        <button id="restoreRemoved${index}" type="button" class="btn btn-secondary" onclick="restoreRemoved(${index})">Restore</button>
                     </div>
                 </div>
             </div>
@@ -289,10 +287,14 @@ function checkNavbarSelection() {
     if (canvas.classList.contains('d-none')) {
         console.log("trashLink active");
         noteLink.style.textDecoration = "none";
+        noteLink.style.color = "grey";
         trashLink.style.textDecoration = "underline";
+        trashLink.style.color = "black";
     } else {
         console.log("notesLink active");
         trashLink.style.textDecoration = "none";
+        trashLink.style.color = "grey";
         noteLink.style.textDecoration = "underline";
+        noteLink.style.color = "black";
     }
 }
