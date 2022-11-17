@@ -1,46 +1,13 @@
 let deletedNotes = [];
 
 
-function showTrash() {
-    let canvas = document.getElementById('canvas');
-    canvas.classList.add('d-none');
-    let trashbin = document.getElementById('trash');
-    trashbin.classList.remove('d-none');
+function renderTrash() {
+    loadTrash();
+    createTrashTemplate();
 }
 
 
-function showNotes() {
-    let canvas = document.getElementById('canvas');
-    canvas.classList.remove('d-none');
-    let trashbin = document.getElementById('trash');
-    trashbin.classList.add('d-none');
-}
-
-
-function hideButton() {
-    let createNote = document.getElementById('createNote');
-    createNote.classList.add('d-none');
-}
-
-/**
- * 1. Delete process starts here
- * @param {*} index of database
- */
-function deleteCard(index) {
-    collectDeletedNote(index);
-    database.splice(index, 1);
-    //Save current database
-    let savedData = JSON.stringify(database);
-    localStorage.setItem('data', savedData);
-    //Render the new database
-    render();
-}
-
-
-function collectDeletedNote(index) {
-    let deletedNote = database[index];
-    deletedNotes.push(deletedNote);
-
+function createTrashTemplate() {
     let trashbin = document.getElementById('trash');
     trashbin.innerHTML = '';
     if (deletedNotes != null) {
@@ -49,14 +16,9 @@ function collectDeletedNote(index) {
             note.setAttribute("id", `deletedNote${i}`);
             note.innerHTML += htmlTemplateDeleted(i);
             trashbin.appendChild(note);
-            console.log(deletedNotes);
-            let title = document.getElementById(`titleRemoved${i}`);
-            let text = document.getElementById(`textareaRemoved${i}`);
-            title.value += database[index].title;
-            text.value += database[index].text;
+            writeTrashInput(i);
         }
     }
-    
 }
 
 
@@ -83,4 +45,30 @@ function htmlTemplateDeleted(index) {
             </div>
         </div>
     `;
+}
+
+
+function writeTrashInput(index) {
+    let title = document.getElementById(`titleRemoved${index}`);
+    let text = document.getElementById(`textareaRemoved${index}`);
+    title.value += deletedNotes[index].title;
+    text.value += deletedNotes[index].text;
+}
+
+
+function saveTrash(index) {
+    let deletedNote = database[index];
+    console.log("setting deleted note: ", deletedNote);
+    deletedNotes.push(deletedNote);
+    console.log("pushing deleted note: ", deletedNotes);
+    let savedData = JSON.stringify(deletedNotes);
+    localStorage.setItem('deletedData', savedData);
+}
+
+
+function loadTrash() {
+    let loadedData = localStorage.getItem('deletedData');
+    if (loadedData !=null) {
+        deletedNotes = JSON.parse(loadedData);
+    }
 }

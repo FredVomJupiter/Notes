@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +13,7 @@
 
 </head>
 
-<body onload="render()">
+<body onload="renderTrash()">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="bootstrap" viewBox="0 0 118 94">
             <title>Bootstrap</title>
@@ -49,43 +48,7 @@
 
     <main>
         
-        <div class="background" id="canvas">
-
-            <div class="top-area">
-                <p>
-                    <button id="createNote" class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample"
-                        onclick="hideButton()">
-                        New note
-                    </button>
-                </p>
-    
-                <div id="newNote" style="min-height: 120px;">
-                    <div class="collapse collapse-horizontal" id="collapseWidthExample">
-                        <!--Bootstrap card-->
-                        <div class="card" style="width: 23rem; background: #ced4da;">
-                            <div class="card-body">
-                                <!--Bootstrap input text-->
-                                <div class="input-group">
-                                    <input id="title" type="text" class="form-control" placeholder="Title">
-                                </div>
-                                <!--Bootstrap input textarea-->
-                                <div class="input-group mb-3">
-                                    <textarea id="textarea" type="textarea" class="form-control"></textarea>
-                                </div>
-                                <!--Bootstrap button-->
-                                <button class="btn btn-primary" type="button" onclick="createNote()">Create note</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-    
-            </div>
-    
-            <div id="noteArea" class="note-area">
-    
-            </div>
+        <div class="trash" id="trash">
 
         </div>
 
@@ -120,6 +83,6 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/sub.js"></script>
+    
 </body>
-
 </html>

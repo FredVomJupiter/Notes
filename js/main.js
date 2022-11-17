@@ -4,7 +4,7 @@ let database = [];
  * 1. Main thread starting point
  */
 function createNote() {
-    if (title.value === '' & textarea.value === '') {
+    if (title.value === '' && textarea.value === '') {
         alert('Title and/or Text missing');
     } else {
         save();
@@ -127,6 +127,25 @@ function writeCardInput(index) {
 }
 
 
+/**
+ * 1. Delete process starts here
+ * @param {*} index of database
+ */
+ function deleteCard(index) {
+    saveTrash(index);
+    database.splice(index, 1);
+    //Save current database
+    let savedData = JSON.stringify(database);
+    localStorage.setItem('data', savedData);
+    //Render the new database
+    render();
+}
+
+
+function hideButton() {
+    let createNote = document.getElementById('createNote');
+    createNote.classList.add('d-none');
+}
 
 
 
