@@ -227,8 +227,8 @@ function loadTrash() {
 function showNotes() {
     let canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
-    let trash = document.getElementById('trash');
-    trash.classList.add('d-none');
+    let canvasTrash = document.getElementById('canvasTrash');
+    canvasTrash.classList.add('d-none')
     render();
 }
 
@@ -236,8 +236,8 @@ function showNotes() {
 function showTrash() {
     let canvas = document.getElementById('canvas');
     canvas.classList.add('d-none');
-    let trash = document.getElementById('trash');
-    trash.classList.remove('d-none');
+    let canvasTrash = document.getElementById('canvasTrash');
+    canvasTrash.classList.remove('d-none')
     renderTrash();
 }
 

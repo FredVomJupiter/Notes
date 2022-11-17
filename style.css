@@ -35,8 +35,6 @@ main {
     padding: 32px;
     gap: 8px;
     width: 100%;
-    min-height: inherit;
-    background-image: linear-gradient(rgba(226, 222, 222, 0.6), rgba(0, 0, 0, 0.6));
 }
 
 .top-area {
