@@ -104,7 +104,7 @@ function htmlTemplate(index) {
     return `
         <div id="container${index}" style="min-height: 120px;">
             <!--Bootstrap card-->
-            <div id="card${index}" class="card" style="width: 23rem; background: #ced4da">
+            <div id="card${index}" class="card" style="width: 20rem; background: white">
                 <div class="card-body">
                     <!--Bootstrap input text-->
                     <div class="input-group">
@@ -184,7 +184,7 @@ function htmlTemplateDeleted(index) {
     return `
         <div id="containerRemoved${index}" style="min-height: 120px;">
             <!--Bootstrap card-->
-            <div id="cardRemoved${index}" class="card" style="width: 23rem; background: #ced4da">
+            <div id="cardRemoved${index}" class="card" style="width: 20rem; background: white">
                 <div class="card-body">
                     <!--Bootstrap input text-->
                     <div class="input-group">

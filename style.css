@@ -22,6 +22,12 @@ main {
     background: white !important;
 }
 
+.form-control {
+    background: white;
+    resize: none;
+    border: none;
+}
+
 .background {
     min-height: inherit;
     background: linear-gradient(rgba(226, 222, 222, 0.6), rgba(0,0,0,.6)), url('img/background.jpg');
