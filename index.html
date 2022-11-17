@@ -14,7 +14,7 @@
 
 </head>
 
-<body onload="render()">
+<body onload="render()" onload="renderTrash()">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="bootstrap" viewBox="0 0 118 94">
             <title>Bootstrap</title>
@@ -39,8 +39,8 @@
     <nav class="navbar bg-light">
         <div class="container-fluid">
             <img id="noteIcon" src="img/notepad.png">
-            <a class="navbar-brand" href="index.html">Notes</a>
-            <a class="navbar-brand" href="trash.html">Trash</a>
+            <a class="navbar-brand" href="#" onclick="showNotes()">Notes</a>
+            <a class="navbar-brand" href="#" onclick="showTrash()">Trash</a>
             <div class="form-outline">
                 <input type="search" id="form1" class="form-control" placeholder="Type query" aria-label="Search" />
             </div>
@@ -48,7 +48,7 @@
     </nav>
 
     <main>
-        
+
         <div class="background" id="canvas">
 
             <div class="top-area">
@@ -88,6 +88,8 @@
             </div>
 
         </div>
+        <div class="trash d-none" id="trash">
+        </div>
 
     </main>
 
@@ -119,7 +121,6 @@
     <!-- JavaScript Bundle with Popper -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/sub.js"></script>
 </body>
 
 </html>
