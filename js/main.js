@@ -2,6 +2,9 @@ let database = [];
 
 let deletedNotes = [];
 
+// Boolean switch used for search field's search moduls: false => searches database, true => searches deletedNotes
+let trashActive = false;
+
 
 function start() {
     checkNavbarSelection();
@@ -230,6 +233,7 @@ function loadTrash() {
 
 
 function showNotes() {
+    trashActive = false;
     let canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
     let canvasTrash = document.getElementById('canvasTrash');
@@ -240,6 +244,7 @@ function showNotes() {
 
 
 function showTrash() {
+    trashActive = true;
     let canvas = document.getElementById('canvas');
     canvas.classList.add('d-none');
     let canvasTrash = document.getElementById('canvasTrash');
@@ -340,9 +345,8 @@ function removeConfirmation(index) {
     card.innerHTML = "";
 }
 
-
 /**
- * G.1 search function starts here
+ * G.1 search function filters start here
  */
 function filterCards() {
     let searchString = document.getElementById('form1').value;
@@ -350,31 +354,72 @@ function filterCards() {
     if (searchString != '') {
         let filteredDatabase = [];
         let indexList = [];
-        for (i = 0; i < database.length; i++) {
-            if (database[i].title.toLowerCase().includes(searchString) || database[i].text.toLowerCase().includes(searchString)) {
-                filteredDatabase.push(database[i]);
-                indexList.push(i);
-            }
+        if (trashActive) {
+            filterTrash(searchString, filteredDatabase, indexList);
+        } else {
+            filterNonTrash(searchString, filteredDatabase, indexList);
         }
-        renderFilter(filteredDatabase, indexList);
     }
+}
+
+
+function filterTrash(searchString, filteredDatabase, indexList) {
+    for (i = 0; i < deletedNotes.length; i++) {
+        if (deletedNotes[i].title.toLowerCase().includes(searchString) || deletedNotes[i].text.toLowerCase().includes(searchString)) {
+            filteredDatabase.push(deletedNotes[i]);
+            indexList.push(i);
+        }
+    }
+    renderFilter(filteredDatabase, indexList);
+}
+
+
+function filterNonTrash(searchString, filteredDatabase, indexList) {
+    for (i = 0; i < database.length; i++) {
+        if (database[i].title.toLowerCase().includes(searchString) || database[i].text.toLowerCase().includes(searchString)) {
+            filteredDatabase.push(database[i]);
+            indexList.push(i);
+        }
+    }
+    renderFilter(filteredDatabase, indexList);
 }
 
 
 function renderFilter(filteredDatabase, indexList) {
     if (filteredDatabase != null) {
-        let noteArea = document.getElementById('noteArea');
-        noteArea.innerHTML = '';
-        for (i = 0; i < filteredDatabase.length; i++) {
-            let note = document.createElement('div');
-            note.setAttribute("id", `filteredNote${i}`);
-            note.innerHTML += htmlTemplate(indexList[i]);
-            noteArea.appendChild(note);
-            writeCardInput(indexList[i]);
+        if (trashActive) {
+            renderFilteredTrash(filteredDatabase, indexList);
+        } else {
+            renderFilteredNoneTrash(filteredDatabase, indexList);
         }
     }
 }
 
+
+function renderFilteredTrash(filteredDatabase, indexList) {
+    let trashbin = document.getElementById('trash');
+    trashbin.innerHTML = '';
+    for (i = 0; i < filteredDatabase.length; i++) {
+        let note = document.createElement('div');
+        note.setAttribute("id", `filteredNote${i}`);
+        note.innerHTML += htmlTemplateDeleted(indexList[i]);
+        trashbin.appendChild(note);
+        writeTrashInput(indexList[i]);
+    }
+}
+
+
+function renderFilteredNoneTrash(filteredDatabase, indexList) {
+    let noteArea = document.getElementById('noteArea');
+    noteArea.innerHTML = '';
+    for (i = 0; i < filteredDatabase.length; i++) {
+        let note = document.createElement('div');
+        note.setAttribute("id", `filteredNote${i}`);
+        note.innerHTML += htmlTemplate(indexList[i]);
+        noteArea.appendChild(note);
+        writeCardInput(indexList[i]);
+    }
+}
 
 /**
  * H.1 filter button starts here
@@ -382,5 +427,9 @@ function renderFilter(filteredDatabase, indexList) {
 function removeFilter() {
     let searchString = document.getElementById('form1');
     searchString.value = '';
-    render();
+    if (trashActive) {
+        renderTrash();
+    } else {
+        render();
+    }
 }

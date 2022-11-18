@@ -42,8 +42,10 @@
             <a class="navbar-brand" id="notesLink" href="#" onclick="showNotes()">Notes</a>
             <a class="navbar-brand" id="trashLink" href="#" onclick="showTrash()">Trash</a>
             <div class="form-outline">
-                <input type="search" id="form1" class="form-control" placeholder="Type query" aria-label="Search" onkeydown="filterCards()"/>
-                <button id="clearFilter" class="btn btn-light" type="button" onclick="removeFilter()">clear filter</button>
+                <input type="search" id="form1" class="form-control" placeholder="Type query" aria-label="Search"
+                    onkeydown="filterCards()" />
+                <button id="clearFilter" class="btn btn-light" type="button" onclick="removeFilter()">clear
+                    filter</button>
             </div>
         </div>
     </nav>
@@ -55,12 +57,12 @@
             <div class="top-area">
                 <p>
                     <button id="createNote" class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample"
-                        onclick="hideButton()">
+                        data-bs-target="#collapseWidthExample" aria-expanded="false"
+                        aria-controls="collapseWidthExample" onclick="hideButton()">
                         New note
                     </button>
                 </p>
-    
+
                 <div id="newNote" style="min-height: 120px;">
                     <div class="collapse collapse-horizontal" id="collapseWidthExample">
                         <!--Bootstrap card-->
@@ -75,17 +77,18 @@
                                     <textarea id="textarea" type="textarea" class="form-control"></textarea>
                                 </div>
                                 <!--Bootstrap button-->
-                                <button class="btn btn-primary" type="button" onclick="createNote()">Create note</button>
+                                <button class="btn btn-primary" type="button" onclick="createNote()">Create
+                                    note</button>
                             </div>
                         </div>
                     </div>
                 </div>
-    
-    
+
+
             </div>
-    
+
             <div id="noteArea" class="note-area">
-    
+
             </div>
 
         </div>
@@ -93,7 +96,7 @@
             <div class="trash" id="trash">
             </div>
         </div>
-        
+
 
     </main>
 
@@ -109,13 +112,16 @@
             </div>
 
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-muted" href="https://www.twitter.com" target="_blank"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-muted" href="https://www.twitter.com" target="_blank"><svg class="bi"
+                            width="24" height="24">
                             <use xlink:href="#twitter"></use>
                         </svg></a></li>
-                <li class="ms-3"><a class="text-muted" href="https://www.instagram.com" target="_blank"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-muted" href="https://www.instagram.com" target="_blank"><svg class="bi"
+                            width="24" height="24">
                             <use xlink:href="#instagram"></use>
                         </svg></a></li>
-                <li class="ms-3"><a class="text-muted" href="https://www.facebook.com" target="_blank"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-muted" href="https://www.facebook.com" target="_blank"><svg class="bi"
+                            width="24" height="24">
                             <use xlink:href="#facebook"></use>
                         </svg></a></li>
             </ul>
