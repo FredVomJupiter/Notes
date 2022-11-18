@@ -74,7 +74,7 @@ function render() {
  */
 function load() {
     let loadedData = localStorage.getItem('data');
-    if (loadedData !=null) {
+    if (loadedData != null) {
         database = JSON.parse(loadedData);
     }
 }
@@ -116,7 +116,9 @@ function htmlTemplate(index) {
                     <!--Bootstrap input dropdown button-->
                     <div class="btn-group">
                         <button id="delete${index}" type="button" class="btn btn-danger" onclick="deleteCard(${index})">Delete</button>
+                        <button id="update${index}" type="button" class="btn btn-primary" onclick="updateCard(${index})">Update</button>
                     </div>
+                    <div class="confirm" id="confirmation${index}" style="font-size: 12px; margin-left: 8px"></div>
                 </div>
             </div>
         </div>
@@ -138,7 +140,7 @@ function writeCardInput(index) {
  * B.1 Delete process starts here
  * @param {*} index of database
  */
- function deleteCard(index) {
+function deleteCard(index) {
     saveTrash(index);
     database.splice(index, 1);
     //Save current database
@@ -186,11 +188,11 @@ function htmlTemplateDeleted(index) {
                 <div class="card-body">
                     <!--Bootstrap input text-->
                     <div class="input-group">
-                        <input id="titleRemoved${index}" type="text" class="form-control" placeholder="Title">
+                        <input id="titleRemoved${index}" type="text" class="form-control" disabled="true" style="background: white">
                     </div>
                     <!--Bootstrap input textarea-->
                     <div class="input-group mb-3">
-                        <textarea id="textareaRemoved${index}" type="textarea" class="form-control"></textarea>
+                        <textarea id="textareaRemoved${index}" type="textarea" class="form-control" disabled="true" style="background: white"></textarea>
                     </div>
                     <!--Bootstrap input dropdown button-->
                     <div class="btn-group">
@@ -221,13 +223,13 @@ function saveTrash(index) {
 
 function loadTrash() {
     let loadedData = localStorage.getItem('deletedData');
-    if (loadedData !=null) {
+    if (loadedData != null) {
         deletedNotes = JSON.parse(loadedData);
     }
 }
 
 
-function showNotes() {  
+function showNotes() {
     let canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
     let canvasTrash = document.getElementById('canvasTrash');
@@ -278,23 +280,106 @@ function saveJSON(option) {
     }
 }
 
-
+/**
+ * E.1 navbar link activation starts here
+ */
 function checkNavbarSelection() {
-    console.log("checking...");
     let canvas = document.getElementById('canvas');
+    if (canvas.classList.contains('d-none')) {
+        activateTrash();
+    } else {
+        activateNotes();
+    }
+}
+
+
+function activateTrash() {
     let trashLink = document.getElementById('trashLink');
     let noteLink = document.getElementById('notesLink');
-    if (canvas.classList.contains('d-none')) {
-        console.log("trashLink active");
-        noteLink.style.textDecoration = "none";
-        noteLink.style.color = "grey";
-        trashLink.style.textDecoration = "underline";
-        trashLink.style.color = "black";
-    } else {
-        console.log("notesLink active");
-        trashLink.style.textDecoration = "none";
-        trashLink.style.color = "grey";
-        noteLink.style.textDecoration = "underline";
-        noteLink.style.color = "black";
+    noteLink.style.textDecoration = "none";
+    noteLink.style.color = "grey";
+    trashLink.style.textDecoration = "underline";
+    trashLink.style.color = "black";
+}
+
+
+function activateNotes() {
+    let trashLink = document.getElementById('trashLink');
+    let noteLink = document.getElementById('notesLink');
+    trashLink.style.textDecoration = "none";
+    trashLink.style.color = "grey";
+    noteLink.style.textDecoration = "underline";
+    noteLink.style.color = "black";
+}
+
+/**
+ * F.1 update button starts here
+ * @param {*} index as string to identify card
+ */
+function updateCard(index) {
+    let newTitle = document.getElementById(`title${index}`).value;
+    let newText = document.getElementById(`textarea${index}`).value;
+    database[index].title = newTitle;
+    database[index].text = newText;
+    saveJSON('database');
+    printConfirmation(index); // Printing confirmation message below card's buttons
+    setTimeout(function () { // After 2 seconds the confirmation will be removed
+        removeConfirmation(index);
+    }, 2000);
+}
+
+
+function printConfirmation(index) {
+    let card = document.getElementById(`confirmation${index}`);
+    card.innerHTML = "update successfull";
+}
+
+
+function removeConfirmation(index) {
+    let card = document.getElementById(`confirmation${index}`);
+    card.innerHTML = "";
+}
+
+
+/**
+ * G.1 search function starts here
+ */
+function filterCards() {
+    let searchString = document.getElementById('form1').value;
+    if (searchString != '') {
+        let filteredDatabase = [];
+        let indexList = [];
+        for (i = 0; i < database.length; i++) {
+            if (database[i].title.includes(searchString) || database[i].text.includes(searchString)) {
+                filteredDatabase.push(database[i]);
+                indexList.push(i);
+            }
+        }
+        renderFilter(filteredDatabase, indexList);
     }
+}
+
+
+function renderFilter(filteredDatabase, indexList) {
+    if (filteredDatabase != null) {
+        let noteArea = document.getElementById('noteArea');
+        noteArea.innerHTML = '';
+        for (i = 0; i < filteredDatabase.length; i++) {
+            let note = document.createElement('div');
+            note.setAttribute("id", `filteredNote${i}`);
+            note.innerHTML += htmlTemplate(indexList[i]);
+            noteArea.appendChild(note);
+            writeCardInput(indexList[i]);
+        }
+    }
+}
+
+
+/**
+ * H.1 filter button starts here
+ */
+function removeFilter() {
+    let searchString = document.getElementById('form1');
+    searchString.value = '';
+    render();
 }
