@@ -110,11 +110,11 @@ function htmlTemplate(index) {
                 <div class="card-body">
                     <!--Bootstrap input text-->
                     <div class="input-group">
-                        <input id="title${index}" type="text" class="form-control" placeholder="Title">
+                        <input id="title${index}" type="text" class="form-control" placeholder="Enter title">
                     </div>
                     <!--Bootstrap input textarea-->
                     <div class="input-group mb-3">
-                        <textarea id="textarea${index}" type="textarea" class="form-control"></textarea>
+                        <textarea id="textarea${index}" type="textarea" class="form-control" placeholder="Enter text"></textarea>
                     </div>
                     <!--Bootstrap input dropdown button-->
                     <div class="btn-group">
@@ -191,11 +191,11 @@ function htmlTemplateDeleted(index) {
                 <div class="card-body">
                     <!--Bootstrap input text-->
                     <div class="input-group">
-                        <input id="titleRemoved${index}" type="text" class="form-control" disabled="true" style="background: white">
+                        <input id="titleRemoved${index}" type="text" class="form-control" disabled="true" style="background: white" placeholder="Enter title">
                     </div>
                     <!--Bootstrap input textarea-->
                     <div class="input-group mb-3">
-                        <textarea id="textareaRemoved${index}" type="textarea" class="form-control" disabled="true" style="background: white"></textarea>
+                        <textarea id="textareaRemoved${index}" type="textarea" class="form-control" disabled="true" style="background: white"placeholder="Enter text"></textarea>
                     </div>
                     <!--Bootstrap input dropdown button-->
                     <div class="btn-group">
