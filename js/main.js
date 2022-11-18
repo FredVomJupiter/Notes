@@ -346,11 +346,12 @@ function removeConfirmation(index) {
  */
 function filterCards() {
     let searchString = document.getElementById('form1').value;
+    searchString = searchString.toLowerCase();
     if (searchString != '') {
         let filteredDatabase = [];
         let indexList = [];
         for (i = 0; i < database.length; i++) {
-            if (database[i].title.includes(searchString) || database[i].text.includes(searchString)) {
+            if (database[i].title.toLowerCase().includes(searchString) || database[i].text.toLowerCase().includes(searchString)) {
                 filteredDatabase.push(database[i]);
                 indexList.push(i);
             }
