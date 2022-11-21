@@ -9,7 +9,7 @@ let trashActive = false;
 function start() {
     checkNavbarSelection();
     render();
-    renderTrash()
+    renderTrash();
 }
 
 /**
@@ -116,11 +116,9 @@ function htmlTemplate(index) {
                     <div class="input-group mb-3">
                         <textarea id="textarea${index}" type="textarea" class="form-control" placeholder="Enter text"></textarea>
                     </div>
-                    <!--Bootstrap input dropdown button-->
-                    <div class="btn-group">
-                        <button id="delete${index}" type="button" class="btn btn-danger" onclick="deleteCard(${index})">Delete</button>
-                        <button id="update${index}" type="button" class="btn btn-primary" onclick="updateCard(${index})">Update</button>
-                    </div>
+                    <!--Bootstrap input button-->
+                    <button id="delete${index}" type="button" class="btn btn-danger" onclick="deleteCard(${index})">Delete</button>
+                    <button id="update${index}" type="button" class="btn btn-primary" onclick="updateCard(${index})">Update</button>
                     <div class="confirm" id="confirmation${index}" style="font-size: 12px; margin-left: 8px"></div>
                 </div>
             </div>
@@ -171,7 +169,7 @@ function renderTrash() {
 function createTrashTemplate() {
     let trashbin = document.getElementById('trash');
     trashbin.innerHTML = '';
-    if (deletedNotes != null) {
+    if (deletedNotes.length != 0) {
         for (i = 0; i < deletedNotes.length; i++) {
             let note = document.createElement('div');
             note.setAttribute("id", `deletedNote${i}`);
@@ -179,6 +177,9 @@ function createTrashTemplate() {
             trashbin.appendChild(note);
             writeTrashInput(i);
         }
+    }
+    if (deletedNotes.length == 0) {
+        trashbin.innerHTML = '<span><b>Trashbin is empty...</b></span>';
     }
 }
 
@@ -197,11 +198,9 @@ function htmlTemplateDeleted(index) {
                     <div class="input-group mb-3">
                         <textarea id="textareaRemoved${index}" type="textarea" class="form-control" disabled="true" style="background: white"placeholder="Enter text"></textarea>
                     </div>
-                    <!--Bootstrap input dropdown button-->
-                    <div class="btn-group">
-                        <button id="deleteRemoved${index}" type="button" class="btn btn-danger" onclick="deleteRemoved(${index})">Delete</button>
-                        <button id="restoreRemoved${index}" type="button" class="btn btn-secondary" onclick="restoreRemoved(${index})">Restore</button>
-                    </div>
+                    <!--Bootstrap input button-->
+                    <button id="deleteRemoved${index}" type="button" class="btn btn-danger" onclick="deleteRemoved(${index})">Delete</button>
+                    <button id="restoreRemoved${index}" type="button" class="btn btn-secondary" onclick="restoreRemoved(${index})">Restore</button>
                 </div>
             </div>
         </div>
