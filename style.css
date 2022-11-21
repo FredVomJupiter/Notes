@@ -3,6 +3,21 @@ body {
     box-sizing: border-box;
 }
 
+.form-outline {
+    display: flex;
+    gap: 4px;
+}
+
+#form1 {
+    width: 200px;
+}
+
+#clearFilter {
+    width: 80px;
+    padding: 6px;
+    font-size: 13px;
+}
+
 #noteIcon {
     width: 40px;
     height: 40px;
@@ -65,14 +80,6 @@ main {
 
 .input {
     border: none;
-}
-
-.form-outline {
-    display: flex;
-}
-
-#clearFilter {
-    font-size: 10px;
 }
 
 .d-none {
